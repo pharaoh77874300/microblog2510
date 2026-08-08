@@ -1,0 +1,212 @@
+// Version: 4.0.0
+type AccessControlState__836714403 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__222667396<Principal, UserRole__686137147>
+  };
+type Data__80296667<K, V> =
+  {var count : Nat__1040412405; kvs : [var ?(K, V)]};
+type ExternalBlob__365673026 = Blob;
+type Int__616954475 = Int;
+type Int__837511138 = Int__616954475;
+type Internal__41346355<K, V> =
+  {children : [var ?Node__1000929467<K, V>]; data : Data__80296667<K, V>};
+type Leaf__712614010<K, V> = {data : Data__80296667<K, V>};
+type Map__222667396<K, V> = Map__912772452<K, V>;
+type Map__709709801<K, V> =
+  {var root : Node__1000929467<K, V>; var size : Nat__1040412405};
+type Map__912772452<K, V> = Map__709709801<K, V>;
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__1000929467<K, V> =
+  {#internal : Internal__41346355<K, V>; #leaf : Leaf__712614010<K, V>};
+type NotificationType__309028197 =
+  {
+    #follow;
+    #like : Nat;
+    #mention : Nat;
+    #quote : Nat;
+    #reply : Nat;
+    #repost : Nat
+  };
+type NotificationType__754463539 =
+  {
+    #follow;
+    #like : Nat;
+    #mention : Nat;
+    #quote : Nat;
+    #reply : Nat;
+    #repost : Nat
+  };
+type Notification__73044690 =
+  {
+    actorPrincipal : Principal;
+    actorUsername : Text;
+    createdAt : Time__688418391;
+    id : Nat;
+    isRead : Bool;
+    notificationType : NotificationType__309028197
+  };
+type Notification__879889657 =
+  {
+    actorPrincipal : Principal;
+    actorUsername : Text;
+    createdAt : Time__688418391;
+    id : Nat;
+    isRead : Bool;
+    notificationType : NotificationType__754463539
+  };
+type PostType__137568890 =
+  {#original; #quote : Nat; #reply : Nat; #repost : Nat};
+type PostType__490378007 =
+  {#original; #quote : Nat; #reply : Nat; #repost : Nat};
+type Post__56459536 =
+  {
+    author : Principal;
+    createdAt : Time__688418391;
+    editedAt : ?Time__688418391;
+    id : Nat;
+    mediaHash : ?ExternalBlob__365673026;
+    mediaType : ?Text;
+    postType : PostType__137568890;
+    text : Text
+  };
+type Post__955439577 =
+  {
+    author : Principal;
+    createdAt : Time__688418391;
+    editedAt : ?Time__688418391;
+    id : Nat;
+    mediaHash : ?ExternalBlob__365673026;
+    mediaType : ?Text;
+    postType : PostType__490378007;
+    text : Text
+  };
+type Time__298180599 = Int__837511138;
+type Time__688418391 = Time__298180599;
+type UserProfile__248713505 =
+  {
+    bio : Text;
+    createdAt : Time__688418391;
+    displayName : Text;
+    headerImageHash : ?ExternalBlob__365673026;
+    profilePictureHash : ?ExternalBlob__365673026;
+    updatedAt : Time__688418391;
+    username : Text
+  };
+type UserProfile__491224006 =
+  {
+    bio : Text;
+    createdAt : Time__688418391;
+    displayName : Text;
+    headerImageHash : ?ExternalBlob__365673026;
+    profilePictureHash : ?ExternalBlob__365673026;
+    updatedAt : Time__688418391;
+    username : Text
+  };
+type UserRole__686137147 = {#admin; #guest; #user};
+{
+  "20250101_000000_Init" :
+    {} ->
+      {
+        accessControlState : AccessControlState__836714403;
+        blocks : Map__222667396<Principal, Map__222667396<Principal, Bool>>;
+        followers :
+          Map__222667396<Principal, Map__222667396<Principal, Bool>>;
+        following :
+          Map__222667396<Principal, Map__222667396<Principal, Bool>>;
+        hashtagIndex : Map__222667396<Text, Map__222667396<Nat, Bool>>;
+        mutes : Map__222667396<Principal, Map__222667396<Principal, Bool>>;
+        var nextNotificationId : Nat;
+        var nextPostId : Nat;
+        postLikes : Map__222667396<Nat, Map__222667396<Principal, Bool>>;
+        postReplies : Map__222667396<Nat, Map__222667396<Nat, Bool>>;
+        postReposts : Map__222667396<Nat, Map__222667396<Principal, Bool>>;
+        posts : Map__222667396<Nat, Post__56459536>;
+        repostIndex : Map__222667396<Principal, Map__222667396<Nat, Nat>>;
+        userNotifications :
+          Map__222667396<Principal,
+                          Map__222667396<Nat, Notification__73044690>>;
+        userPostCounts : Map__222667396<Principal, Nat>;
+        userProfiles : Map__222667396<Principal, UserProfile__248713505>;
+        usernameToUser : Map__222667396<Text, Principal>
+      }
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__222667396<Principal, UserRole__686137147>
+    };
+  stable blocks :
+    {
+      var root : Node__1000929467<Principal, Map__222667396<Principal, Bool>>;
+      var size : Nat__1040412405
+    };
+  stable followers :
+    {
+      var root : Node__1000929467<Principal, Map__222667396<Principal, Bool>>;
+      var size : Nat__1040412405
+    };
+  stable following :
+    {
+      var root : Node__1000929467<Principal, Map__222667396<Principal, Bool>>;
+      var size : Nat__1040412405
+    };
+  stable hashtagIndex :
+    {
+      var root : Node__1000929467<Text, Map__222667396<Nat, Bool>>;
+      var size : Nat__1040412405
+    };
+  stable mutes :
+    {
+      var root : Node__1000929467<Principal, Map__222667396<Principal, Bool>>;
+      var size : Nat__1040412405
+    };
+  stable var nextNotificationId : Nat;
+  stable var nextPostId : Nat;
+  stable postLikes :
+    {
+      var root : Node__1000929467<Nat, Map__222667396<Principal, Bool>>;
+      var size : Nat__1040412405
+    };
+  stable postReplies :
+    {
+      var root : Node__1000929467<Nat, Map__222667396<Nat, Bool>>;
+      var size : Nat__1040412405
+    };
+  stable postReposts :
+    {
+      var root : Node__1000929467<Nat, Map__222667396<Principal, Bool>>;
+      var size : Nat__1040412405
+    };
+  stable posts :
+    {
+      var root : Node__1000929467<Nat, Post__955439577>;
+      var size : Nat__1040412405
+    };
+  stable repostIndex :
+    {
+      var root : Node__1000929467<Principal, Map__222667396<Nat, Nat>>;
+      var size : Nat__1040412405
+    };
+  stable userNotifications :
+    {
+      var root :
+        Node__1000929467<Principal,
+                          Map__222667396<Nat, Notification__879889657>>;
+      var size : Nat__1040412405
+    };
+  stable userPostCounts :
+    {var root : Node__1000929467<Principal, Nat>; var size : Nat__1040412405};
+  stable userProfiles :
+    {
+      var root : Node__1000929467<Principal, UserProfile__491224006>;
+      var size : Nat__1040412405
+    };
+  stable usernameToUser :
+    {
+      var root : Node__1000929467<Text, Principal>;
+      var size : Nat__1040412405
+    }
+};
